@@ -1,3 +1,3 @@
 # ainsoka.github.io
 ## to develop
-`nix-shell -p git babashka`
+`nix-shell -p git openssh coreutils babashka`
