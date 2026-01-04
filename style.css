@@ -1,0 +1,560 @@
+:root {
+    /* Swiss Minimalist Theme */
+    --color-bg: #F2F2F2;
+    --color-text: #060606;
+    --color-accent: #9C9C9C;
+    --color-border: #E0E0E0;
+    --color-surface: #FFFFFF;
+
+    /* Dark Mode Overrides (applied via class) */
+    --color-dark-primary: #39FF14;
+    /* Acid Green */
+    --color-dark-secondary: #BD00FF;
+    /* Acid Purple */
+
+    --font-main: 'Space Grotesk', sans-serif;
+    --grid-gap: 24px;
+    --border-radius: 2px;
+    /* Rigid, brutalist */
+
+    --transition-speed: 0.3s;
+}
+
+/* Dark Mode Toggle */
+body.dark-mode {
+    --color-bg: #050505;
+    --color-text: #F0F0F0;
+    --color-accent: var(--color-dark-primary);
+    --color-surface: #111;
+    --color-border: #333;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-text);
+    padding-bottom: 12px;
+    margin-bottom: 40px;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.nav-link:hover {
+    border-color: var(--color-text);
+}
+
+.btn-dark {
+    background: transparent;
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
+    padding: 6px 12px;
+    font-family: var(--font-main);
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.btn-dark:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+}
+
+/* Post Feed */
+.feed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--grid-gap);
+}
+
+.post-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.post-card:hover {
+    border-color: var(--color-text);
+    transform: translateY(-2px);
+}
+
+/* Dark Mode Hover Glow */
+body.dark-mode .post-card:hover {
+    box-shadow: 0 0 15px var(--color-dark-primary);
+    border-color: var(--color-dark-primary);
+}
+
+.post-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    margin-bottom: 15px;
+    filter: grayscale(100%);
+    border-radius: 2px;
+    transition: filter 0.3s;
+}
+
+.post-card:hover .post-image {
+    filter: grayscale(0%);
+}
+
+.post-meta {
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.post-body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.post-tags {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border: 1px solid var(--color-border);
+    color: var(--color-accent);
+    border-radius: 2px;
+}
+
+body.dark-mode .tag {
+    border-color: #333;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: var(--color-surface);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    padding: 30px;
+    border: 1px solid var(--color-text);
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-text);
+    line-height: 1;
+}
+
+.modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.modal-text {
+    color: var(--color-text);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    margin-bottom: 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .app-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .nav-links {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .feed-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Fullscreen Image Zoom */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 2000; /* Above normal modal */
+  overflow-y: auto; /* Allow scrolling */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Start from top so tall images scroll */
+  padding: 40px;
+  cursor: zoom-out;
+}
+
+.fullscreen-image {
+  max-width: 95vw;
+  height: auto;
+  margin: auto; /* Centers vertically if smaller than viewport */
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  display: block;
+}
+
+.modal-image {
+  cursor: zoom-in; /* Indicate clickable */
+}
+
+/* Carousel */
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 600px; /* Adjust as needed */
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.carousel-slide img {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.carousel-btn {
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: 1px solid #555;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0px 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    z-index: 5;
+    transition: background 0.2s;
+}
+
+.carousel-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.carousel-btn.prev {
+    left: -20px;
+}
+
+.carousel-btn.next {
+    right: -20px;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: -30px;
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #555;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.indicator.active {
+    background: #FFD700;
+    box-shadow: 0 0 5px #FFD700;
+}
+
+/* Minimal Swiss Carousel Overrides */
+.carousel-btn {
+    background: transparent !important;
+    border: none !important;
+    color: var(--color-text) !important;
+    font-size: 3rem !important; /* Larger, thinner arrows ideally */
+    font-family: var(--font-main); /* Ensure consistency */
+    font-weight: 300;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    padding: 0 20px !important;
+}
+
+.carousel-btn:hover {
+    background: transparent !important;
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1); /* Subtle grow */
+}
+
+/* Position them further out or just cleanly to the side */
+.carousel-btn.prev {
+    left: -60px; /* Move outside the image */
+}
+
+.carousel-btn.next {
+    right: -60px;
+}
+
+/* Adjust carousel container to allow buttons outside */
+.carousel {
+    overflow: visible; /* Allow buttons to sit outside */
+}
+
+/* Indicators: Minimal dots */
+.carousel-indicators {
+    bottom: -40px;
+    gap: 12px;
+}
+
+.indicator {
+    width: 6px;
+    height: 6px;
+    background: var(--color-border); /* Subtle gray */
+    opacity: 1;
+}
+
+.indicator.active {
+    background: var(--color-text); /* Black/White */
+    box-shadow: none; /* Remove glow */
+    transform: scale(1.2);
+}
+
+/* Ensure modal handles the wider carousel area if needed */
+.modal-content {
+    overflow-x: hidden; /* Prevent horizontal scroll bar on modal if buttons go too far */
+}
+
+/* Dense Header Tweaks */
+.app-header {
+    padding-bottom: 5px !important;
+    margin-bottom: 20px !important;
+    align-items: flex-end; /* Align bottom of logo and nav? */
+}
+
+.logo {
+    display: block;
+    margin-bottom: -5px; /* Pull tighter to the line if needed */
+}
+
+/* Alignment Fix */
+.app-header {
+    align-items: center !important; /* Center vertically */
+    padding-bottom: 10px !important; /* Restore a bit of space */
+}
+
+.logo {
+    margin-bottom: 0 !important; /* Reset negative margin */
+    /* Ensure it doesn't overflow if centered */
+    display: block;
+}
+
+/* Alignment Fix v2: Bottom Align */
+.app-header {
+    align-items: flex-end !important; /* "all down" */
+    padding-bottom: 0px !important;   /* "less padding below" */
+    box-shadow: none; /* In case there's shadow */
+}
+
+.logo {
+    display: block;
+    margin-bottom: 0px !important; /* Ensure logo sits on the line */
+    /* If the SVG has built-in padding, it might still float. 
+       But I cropped the SVG height to 140, so it should be tighter. */
+}
+
+/* Alignment Fix v3: Nice Distance */
+.app-header {
+    align-items: center !important; /* Back to center for safety */
+    padding-bottom: 8px !important; /* Nice distance from stroke provided by border-bottom */
+    margin-bottom: 30px !important; /* Space between header and content */
+}
+
+.logo {
+    margin-bottom: 0 !important;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Ensure buttons have spacing */
+    height: 100%; /* Match header height if needed */
+}
+
+/* Logo Space Fix */
+.brand {
+    display: block;      /* No inline spacing */
+    line-height: 0;      /* Kill descenders */
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+    display: block;
+    height: auto;      /* Respect aspect ratio */
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Standardized Navigation */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px; /* Increased from 15/20px for better rhythm */
+    height: 100%;
+}
+
+.nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s, opacity 0.2s;
+    cursor: pointer;
+    font-size: 0.85rem; /* Slight bump */
+    text-transform: uppercase;
+    letter-spacing: 0.05em; /* Swiss touch */
+}
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+/* Enforce consistent vertical scrollbar to prevent horizontal jumps */
+html {
+    overflow-y: scroll;
+}
+
+/* Enforce strict padding for app container to alignment */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px !important; /* Force consistency */
+    padding-top: 24px !important;
+}
+
+/* Ensure body has no margin interference */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Fix for doodle visibility on light backgrounds */
+.tag-doodle .post-image {
+    filter: invert(1) grayscale(100%);
+}
+.post-card.tag-doodle:hover .post-image {
+    filter: invert(1) grayscale(0%);
+}
+/* Revert inversion in Dark Mode so white stays white */
+body.dark-mode .tag-doodle .post-image {
+    filter: invert(0) grayscale(100%);
+}
+body.dark-mode .post-card.tag-doodle:hover .post-image {
+    filter: invert(0) grayscale(0%);
+}
+
+
+/* Fix for doodle visibility in modal */
+.tag-doodle .modal-image {
+    filter: invert(1) grayscale(100%);
+}
+body.dark-mode .tag-doodle .modal-image {
+    filter: invert(0) grayscale(100%);
+}
